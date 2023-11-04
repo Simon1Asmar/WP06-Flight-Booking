@@ -7,19 +7,56 @@
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
+
+  <section>
+    <nav id="navigation-bar">
+      <h1>Asmar <span>Airlines</span></h1>
+    </nav>
+  </section>
   
-  <form id="login-form" action="">
-    <input type="email" name="email" id="email" placeholder="Email">
-    <p class="error-message" id="emailError"></p>
-    <input type="password" name="password" id="password" placeholder="Password">
-    <p class="error-message" id="passwordError"></p>
-    <input type="text" name="name" id="name" placeholder="Name">
-    <label for="admin">
-      <input type="checkbox" name="admin" id="admin">
-      admin
-    </label>
-    <button type="submit">Login</button>
-  </form>
+  <Section id="login-section">
+    <form id="login-form" action="">
+      <label for="email">
+        Email:
+        <input type="email" name="email" id="email" placeholder="Email">
+        <p class="error-message" id="emailError"></p>
+      </label>
+      <label for="password">
+        Password:
+        <input type="password" name="password" id="password" placeholder="Password">
+        <p class="error-message" id="passwordError"></p>
+      </label>
+      <label for="name">
+        Name:
+        <input type="text" name="name" id="name" placeholder="Name">
+      </label>
+      <label for="admin">
+        <input type="checkbox" name="admin" id="admin">
+        admin
+      </label>
+      <button type="submit">Login</button>
+    </form>
+  </Section>
+
+  <section id="available-flights" class="card-holder">
+    <h2 class="title">Available Flights</h2>
+
+    <!-- <section class="flight-card">
+      <p>from</p>
+      <p>to</p>
+      <button type="button">Book</button>
+    </section>
+    <section class="flight-card">
+      <p>from</p>
+      <p>to</p>
+      <button type="button">Book</button>
+    </section>
+    <section class="flight-card">
+      <p>from</p>
+      <p>to</p>
+      <button type="button">Book</button>
+    </section> -->
+  </section>
 
   <script src="./assets/js/script.js"></script>
 </body>

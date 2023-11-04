@@ -1,57 +1,71 @@
-const flights = [
-  {
-      from: "Tel aviv",
-      to:'amsterdam',
-      price: 40,
-      dates:[
-          {depart: new Date ('24.11.2023')},
-          {return: new Date ('1.12.2023')}
-      ]
+const flightsDatabase = {
+  flights : [
+    {
+        from: "Tel aviv",
+        to:'amsterdam',
+        price: 40,
+        dates:[
+            {depart: new Date ('24.11.2023')},
+            {return: new Date ('1.12.2023')}
+        ]
+    },
+    {
+        from: "Tel aviv",
+        to:'london',
+        price: 75,
+        dates:[
+            {depart: new Date ('28.11.2023')},
+            {return: new Date ('12.12.2023')}
+        ]
+    },
+    {
+        from: "Athens",
+        to:'Prague',
+        price: 95,
+        dates:[
+            {depart: new Date ('28.11.2023')},
+            {return: new Date ('12.12.2023')}
+        ]
+    },
+    {
+        from: "Berlin",
+        to:'Prague',
+        price: 22,
+        dates:[
+            {depart: new Date ('28.11.2023')},
+            {return: new Date ('12.12.2023')}
+        ]
+    },
+    {
+        from: "London",
+        to:'Berlin',
+        price: 100,
+        dates:[
+            {depart: new Date ('28.11.2023')},
+            {return: new Date ('12.12.2023')}
+        ]
+    }
+  ],
+  addFlight : function (from, to, price, dates){
+    const newFlight = {
+      from: from,
+      to: to,
+      price: price,
+      dates: dates,
+    };
+
+    this.flights.push(newFlight);
   },
-  {
-      from: "Tel aviv",
-      to:'london',
-      price: 75,
-      dates:[
-          {depart: new Date ('28.11.2023')},
-          {return: new Date ('12.12.2023')}
-      ]
-  },
-  {
-      from: "Athens",
-      to:'Prague',
-      price: 95,
-      dates:[
-          {depart: new Date ('28.11.2023')},
-          {return: new Date ('12.12.2023')}
-      ]
-  },
-  {
-      from: "Berlin",
-      to:'Prague',
-      price: 22,
-      dates:[
-          {depart: new Date ('28.11.2023')},
-          {return: new Date ('12.12.2023')}
-      ]
-  },
-  {
-      from: "London",
-      to:'Berlin',
-      price: 100,
-      dates:[
-          {depart: new Date ('28.11.2023')},
-          {return: new Date ('12.12.2023')}
-      ]
-  }
-]
+}
 
 //selecting DOM elements
+const loginSection = document.querySelector("#login-section")
 const loginForm = document.querySelector("#login-form");
 const emailInput = document.querySelector("#email");
 const passwordInput = document.querySelector("#password");
 const nameInput = document.querySelector("#name");
 const adminCheckbox = document.querySelector("#admin");
+const availableFlightsSection = document.querySelector("#available-flights");
 
 let isAdmin = false;
 
@@ -63,6 +77,8 @@ logoutButton.textContent = "Logout";
 logoutButton.addEventListener("click", logout);
 
 checkIfLoggedIn();
+
+//USER AUTHENTICATION
 
 function loginValidation(event){
   event.preventDefault();
@@ -114,14 +130,14 @@ function showError(input, message){
 function login(){
   loginForm.remove();
 
-  document.body.append(logoutButton);
+  loginSection.append(logoutButton);
 }
 
 function logout(){
   localStorage.clear();
   logoutButton.remove();
 
-  document.body.append(loginForm);
+  loginSection.append(loginForm);
 
 }
 
@@ -133,3 +149,11 @@ function checkIfLoggedIn(){
     logout();
   }
 }
+
+//User Roles and Features
+
+//if admin
+//add flights, search, and sort flights(price)
+
+//user
+//search, and sort flights(price)
