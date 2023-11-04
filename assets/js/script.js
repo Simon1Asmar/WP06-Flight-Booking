@@ -47,8 +47,6 @@ const flightsDatabase = {
     }
   ],
   addFlight : function (from, to, price, departureDate, returnDate){
-    console.log("DEPART", departureDate);
-    console.log("DEPART", new Date (departureDate));
     const newFlight = {
       from: from,
       to: to,
@@ -60,7 +58,6 @@ const flightsDatabase = {
     };
 
     this.flights.push(newFlight);
-    console.log(this.flights);
   },
 }
 
@@ -83,7 +80,8 @@ logoutButton.textContent = "Logout";
 logoutButton.addEventListener("click", logout);
 
 //create admin addflight menu
-const addNewFlightSection = document.querySelector("#add-flight-section")
+const addNewFlightSectionParent = document.querySelector("#add-flight-section")
+const addNewFlightSection = document.querySelector("#add-flight-section section")
 const addFlightForm = document.querySelector("#add-flight-section form")
 
 addFlightForm.addEventListener("submit", addFlightFormSubmitted);
@@ -144,6 +142,11 @@ function login(){
   loginForm.remove();
 
   loginSection.append(logoutButton);
+
+  const isAdmin = localStorage.getItem("isAdmin");
+  if(isAdmin === "true"){
+    addNewFlightSectionParent.append(addNewFlightSection);
+  }
 }
 
 function logout(){
@@ -151,6 +154,8 @@ function logout(){
   logoutButton.remove();
 
   loginSection.append(loginForm);
+
+  addNewFlightSection.remove();
 
 }
 
