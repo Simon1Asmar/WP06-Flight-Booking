@@ -88,6 +88,7 @@ addFlightForm.addEventListener("submit", addFlightFormSubmitted);
 
 
 checkIfLoggedIn();
+displayAvailableFlights();
 
 //USER AUTHENTICATION
 
@@ -172,7 +173,7 @@ function checkIfLoggedIn(){
 //User Roles and Features
 
 //if admin
-//add flights, search, and sort flights(price)
+// search, and sort flights(price)
 
 //gets the inputs from the form and calls the function that adds the input to the database
 function addFlightFormSubmitted(event){
@@ -190,6 +191,31 @@ function addFlightFormSubmitted(event){
 
   console.log(flightsDatabase.flights);
   
+}
+
+function displayAvailableFlights(){
+  const flightsArray = flightsDatabase.flights;
+
+  flightsArray.forEach(flight => {
+    const flightCard = document.createElement("section");
+    flightCard.classList.add("flight-card");
+    availableFlightsSection.append(flightCard);
+
+    const countries = document.createElement("p");
+    countries.innerText = `From: ${flight.from}\nTo: ${flight.to}`;
+    flightCard.append(countries);
+    
+    const datesP = document.createElement("p");
+    const departDateString = `${flight.dates[0].depart.getDate()}.${flight.dates[0].depart.getMonth()}.${flight.dates[0].depart.getFullYear()}`;
+    const returnDateString = `${flight.dates[1].return.getDate()}.${flight.dates[1].return.getMonth()}.${flight.dates[1].return.getFullYear()}`;
+    datesP.innerText = `${departDateString}\n${returnDateString}`
+    flightCard.append(datesP);
+
+    const priceP = document.createElement("p");
+    priceP.innerText = `$${flight.price}`
+    flightCard.append(priceP);
+
+  })
 }
 
 //user
