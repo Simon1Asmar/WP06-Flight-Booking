@@ -5,8 +5,8 @@ const flightsDatabase = {
         to:'amsterdam',
         price: 40,
         dates:[
-            {depart: new Date ('24.11.2023')},
-            {return: new Date ('1.12.2023')}
+            {depart: new Date ('2023/11/24')},
+            {return: new Date ('2023/12/1')}
         ]
     },
     {
@@ -14,8 +14,8 @@ const flightsDatabase = {
         to:'london',
         price: 75,
         dates:[
-            {depart: new Date ('28.11.2023')},
-            {return: new Date ('12.12.2023')}
+            {depart: new Date ('2023/11/28')},
+            {return: new Date ('2023/12/12')}
         ]
     },
     {
@@ -23,8 +23,8 @@ const flightsDatabase = {
         to:'Prague',
         price: 95,
         dates:[
-            {depart: new Date ('28.11.2023')},
-            {return: new Date ('12.12.2023')}
+            {depart: new Date ('2023/11/28')},
+            {return: new Date ('2023/12/12')}
         ]
     },
     {
@@ -32,8 +32,8 @@ const flightsDatabase = {
         to:'Prague',
         price: 22,
         dates:[
-            {depart: new Date ('28.11.2023')},
-            {return: new Date ('12.12.2023')}
+            {depart: new Date ('2023/11/28')},
+            {return: new Date ('2023/12/12')}
         ]
     },
     {
@@ -41,20 +41,26 @@ const flightsDatabase = {
         to:'Berlin',
         price: 100,
         dates:[
-            {depart: new Date ('28.11.2023')},
-            {return: new Date ('12.12.2023')}
+            {depart: new Date ('2023/11/28')},
+            {return: new Date ('2023/12/12')}
         ]
     }
   ],
-  addFlight : function (from, to, price, dates){
+  addFlight : function (from, to, price, departureDate, returnDate){
+    console.log("DEPART", departureDate);
+    console.log("DEPART", new Date (departureDate));
     const newFlight = {
       from: from,
       to: to,
       price: price,
-      dates: dates,
+      dates: [
+        {depart: new Date (departureDate)},
+        {return: new Date (returnDate)}
+    ],
     };
 
     this.flights.push(newFlight);
+    console.log(this.flights);
   },
 }
 
@@ -75,6 +81,13 @@ loginForm.addEventListener("submit", loginValidation);
 const logoutButton = document.createElement("button");
 logoutButton.textContent = "Logout";
 logoutButton.addEventListener("click", logout);
+
+//create admin addflight menu
+const addNewFlightSection = document.querySelector("#add-flight-section")
+const addFlightForm = document.querySelector("#add-flight-section form")
+
+addFlightForm.addEventListener("submit", addFlightFormSubmitted);
+
 
 checkIfLoggedIn();
 
@@ -150,10 +163,29 @@ function checkIfLoggedIn(){
   }
 }
 
+
 //User Roles and Features
 
 //if admin
 //add flights, search, and sort flights(price)
+
+//gets the inputs from the form and calls the function that adds the input to the database
+function addFlightFormSubmitted(event){
+  event.preventDefault();
+
+  if(from && to  && price && departDate && returnDate){
+    const from = addFlightForm.elements.from.value;
+    const to = addFlightForm.elements.to.value;
+    const price = Number(addFlightForm.elements.price.value);
+    const departDate = new Date(addFlightForm.elements.departDate.value);
+    const returnDate = new Date(addFlightForm.elements.returnDate.value);
+
+    flightsDatabase.addFlight(from, to, price, departDate, returnDate);
+  }
+
+  console.log(flightsDatabase.flights);
+  
+}
 
 //user
 //search, and sort flights(price)

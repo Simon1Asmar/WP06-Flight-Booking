@@ -38,6 +38,37 @@
     </form>
   </Section>
 
+  <section id="add-flight-section" class="card-holder">
+    <h2 class="title">Add New Flight</h2>
+    <form action="">
+      <label for="from">
+        From:
+        <input type="text" name="from" id="from" placeholder="From city">
+      </label>
+      <label for="to">
+        To:
+        <input type="text" name="to" id="to" placeholder="To city">
+      </label>
+      <label for="price">
+        Price ($): 
+        <input type="number" name="price" id="price" min="1">
+      </label>
+      <label for="departDate">
+        Departure Date:
+        <input type="date" name="departDate" id="departDate">
+      </label>
+      <label for="returnDate">
+        Return Date:
+        <input type="date" name="returnDate" id="returnDate">
+      </label>
+
+      <button type="submit">
+        Add Flight
+      </button>
+    </form>
+
+  </section>
+
   <section id="available-flights" class="card-holder">
     <h2 class="title">Available Flights</h2>
 
