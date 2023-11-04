@@ -57,12 +57,12 @@ let isAdmin = false;
 
 loginForm.addEventListener("submit", loginValidation);
 
-checkIfLoggedIn();
-
 //created logout button, to be appended or removed depending on wether the useris logged in or out
 const logoutButton = document.createElement("button");
 logoutButton.textContent = "Logout";
 logoutButton.addEventListener("click", logout);
+
+checkIfLoggedIn();
 
 function loginValidation(event){
   event.preventDefault();
