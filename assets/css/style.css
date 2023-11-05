@@ -127,7 +127,6 @@ input[type="checkbox"]:hover{
 
   margin: 10px 10px;
 
-  gap: 10px;
 }
 
 .flight-card{
@@ -140,10 +139,41 @@ input[type="checkbox"]:hover{
 
 }
 
+.flight-card:hover{
+  cursor: pointer;
+  background-color: rgba(245, 222, 179, 0.1);
+}
+
 #add-flight-section form{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
+}
+
+#sort-button-section {
+  display: flex;
+  align-items: end;
+  justify-content: end;
+
+  width: 90vw;
+}
+
+#sort-by-price-button{
+  cursor: pointer;
+  font-size: 15px;
+  width: 30px;
+  height: 30px;
+  border-radius: 100px;
+  border: solid wheat 2px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+}
+
+#sort-by-price-button:hover{
+  background-color: rgba(245, 222, 179, 0.251);
 }

@@ -59,6 +59,20 @@ const flightsDatabase = {
 
     this.flights.push(newFlight);
   },
+  sortByPrice : function (){
+    //updates sorting flag which will be used to decide the order
+    this.currentSortingFlag=((this.currentSortingFlag)%2)+1; //goes from 1 to 2
+    console.log('this.currentSortingFlag', this.currentSortingFlag)
+
+    if(this.currentSortingFlag === 1){
+      this.flights.sort((a,b) => a.price - b.price);
+    } else {
+      this.flights.sort((a,b) => b.price - a.price);
+    }
+    
+  },
+  //0 unsorted, 1 descending, 2 ascending
+  currentSortingFlag: 0,
 }
 
 //selecting DOM elements
@@ -86,6 +100,9 @@ const addFlightForm = document.querySelector("#add-flight-section form")
 
 addFlightForm.addEventListener("submit", addFlightFormSubmitted);
 
+//selecting the sort by price button and adding an event listener to it
+const sortByPriceBtn = document.querySelector("#sort-by-price-button");
+sortByPriceBtn.addEventListener("click", sortByPriceClicked);
 
 checkIfLoggedIn();
 displayAvailableFlights();
@@ -187,13 +204,17 @@ function addFlightFormSubmitted(event){
     const returnDate = new Date(addFlightForm.elements.returnDate.value);
 
     flightsDatabase.addFlight(from, to, price, departDate, returnDate);
+    displayAvailableFlights();
+    addFlightForm.reset();
   }
 
-  console.log(flightsDatabase.flights);
   
 }
 
 function displayAvailableFlights(){
+  // clear the section
+  clearAllAvailableCardsChildren();
+
   const flightsArray = flightsDatabase.flights;
 
   flightsArray.forEach(flight => {
@@ -215,6 +236,19 @@ function displayAvailableFlights(){
     priceP.innerText = `$${flight.price}`
     flightCard.append(priceP);
 
+  })
+}
+
+function sortByPriceClicked(){
+  flightsDatabase.sortByPrice();
+  displayAvailableFlights();
+}
+
+function clearAllAvailableCardsChildren(){
+  const allAvailableFlightCards = availableFlightsSection.querySelectorAll(".flight-card");
+
+  allAvailableFlightCards.forEach((flightCard) => {
+    flightCard.remove();
   })
 }
 
