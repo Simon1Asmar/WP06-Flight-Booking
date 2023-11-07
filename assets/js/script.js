@@ -73,6 +73,22 @@ const flightsDatabase = {
   },
   //0 unsorted, 1 descending, 2 ascending
   currentSortingFlag: 0,
+  searchFlights: function (searchInput){
+    searchInput = searchInput.toLowerCase();
+    return this.flights.filter(flight => {
+      //creates a long string with all the data for each flight then checks if this string includes any part of the search input
+      const departDateObj = flight.dates[0].depart;
+      const returnDateObj = flight.dates[1].return;
+      const departDateString = `${departDateObj.getDate()}.${departDateObj.getMonth()}.${departDateObj.getFullYear()}`
+      const returnDateString = `${returnDateObj.getDate()}.${returnDateObj.getMonth()}.${returnDateObj.getFullYear()}`
+      const flightInfoString = `${flight.from.toLowerCase()} ${flight.to.toLowerCase()} \$${flight.price} ${departDateString} ${returnDateString}`;
+      console.log('flightInfoString', flightInfoString)
+
+      if( flightInfoString.includes(searchInput)){
+        return true;
+      }
+    })
+  }
 }
 
 //selecting DOM elements
@@ -83,6 +99,10 @@ const passwordInput = document.querySelector("#password");
 const nameInput = document.querySelector("#name");
 const adminCheckbox = document.querySelector("#admin");
 const availableFlightsSection = document.querySelector("#available-flights");
+
+//selecting searchbar dom and addint event listener
+const searchBar = document.querySelector("#search");
+searchBar.addEventListener("input", displayAvailableFlights);
 
 let isAdmin = false;
 
@@ -215,7 +235,8 @@ function displayAvailableFlights(){
   // clear the section
   clearAllAvailableCardsChildren();
 
-  const flightsArray = flightsDatabase.flights;
+  const flightsArray = searchBar.value.length === 0 ? flightsDatabase.flights : flightsDatabase.searchFlights(searchBar.value);
+  // const flightsArray = flightsDatabase.flights;
 
   flightsArray.forEach(flight => {
     const flightCard = document.createElement("section");
